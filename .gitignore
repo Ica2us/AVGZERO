@@ -1,0 +1,89 @@
+# Build outputs
+build/
+dist/
+*.wasm
+*.js.mem
+*.wat
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+!Makefile
+*.cmake
+!cmake/*.cmake
+
+# Compiled Object files
+*.o
+*.obj
+*.lo
+*.slo
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.a
+*.lib
+*.la
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Emscripten
+*.bc
+*.wast
+/emsdk
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Test outputs
+test_output/
+coverage/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+env/
+
+# Assets (optional - uncomment if you don't want to track large assets)
+web/assets/images/*.jpg
+web/assets/images/*.png
+web/assets/audio/*.mp3
+web/assets/audio/*.ogg

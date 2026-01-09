@@ -1,0 +1,28 @@
+{
+  "name": "avg-game-engine",
+  "version": "1.0.0",
+  "description": "AVG Game Engine with WebAssembly",
+  "main": "web/src/main.js",
+  "scripts": {
+    "build": "npm run build:wasm && npm run build:web",
+    "build:wasm": "bash scripts/build_wasm.sh",
+    "build:web": "bash scripts/build_web.sh",
+    "dev": "bash scripts/dev_server.sh",
+    "clean": "bash scripts/clean.sh",
+    "test": "node tests/js/test_runner.js",
+    "deploy": "bash scripts/deploy.sh"
+  },
+  "keywords": [
+    "avg",
+    "visual-novel",
+    "webassembly",
+    "game-engine"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "eslint": "^8.50.0"
+  },
+  "dependencies": {}
+}

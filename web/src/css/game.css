@@ -1,0 +1,166 @@
+/* Game screen styles */
+#game-screen {
+    background-color: #000;
+}
+
+/* Background */
+.background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+}
+
+/* Character */
+#character-layer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 250px;
+    pointer-events: none;
+}
+
+.character-image {
+    max-width: 600px;
+    max-height: 80%;
+    object-fit: contain;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+/* UI Layer */
+#ui-layer {
+    pointer-events: none;
+}
+
+#ui-layer > * {
+    pointer-events: auto;
+}
+
+/* Dialogue Box */
+.dialogue-box {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    background: var(--dialogue-bg);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.dialogue-speaker {
+    margin-bottom: 10px;
+}
+
+#speaker-name {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #3498db;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.dialogue-text {
+    margin-bottom: 10px;
+}
+
+#dialogue-text {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #ecf0f1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    min-height: 60px;
+}
+
+.dialogue-continue {
+    text-align: right;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Choice Box */
+.choice-box {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+    background: var(--choice-bg);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.choice-title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#choice-question {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #ecf0f1;
+}
+
+.choice-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.choice-button {
+    padding: 15px 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.choice-button:hover {
+    transform: translateX(10px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
+}
+
+/* Menu Bar */
+.menu-bar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.menu-bar:hover {
+    opacity: 1;
+}
+
+.menu-btn {
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    color: white;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.5);
+}

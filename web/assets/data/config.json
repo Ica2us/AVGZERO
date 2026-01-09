@@ -1,0 +1,26 @@
+{
+  "game": {
+    "title": "Sample AVG Game",
+    "version": "1.0.0",
+    "defaultLanguage": "en-US"
+  },
+  "display": {
+    "width": 1920,
+    "height": 1080,
+    "fullscreen": false
+  },
+  "audio": {
+    "bgmVolume": 0.5,
+    "seVolume": 0.7,
+    "voiceVolume": 0.8
+  },
+  "text": {
+    "typewriterSpeed": 50,
+    "autoModeDelay": 2000
+  },
+  "paths": {
+    "images": "assets/images/",
+    "audio": "assets/audio/",
+    "data": "assets/data/"
+  }
+}

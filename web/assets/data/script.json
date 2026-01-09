@@ -1,0 +1,144 @@
+{
+  "title": "Sample AVG Game",
+  "version": "1.0.0",
+  "startNode": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "dialogue",
+      "speaker": "Narrator",
+      "text": "Welcome to the AVG Game Engine demo! This is a sample visual novel built with WebAssembly.",
+      "background": "room.jpg",
+      "bgm": "main_theme.mp3",
+      "next": "intro"
+    },
+    {
+      "id": "intro",
+      "type": "dialogue",
+      "speaker": "Protagonist",
+      "text": "I woke up in a strange room. Where am I?",
+      "character": "protagonist",
+      "expression": "normal",
+      "next": "look_around"
+    },
+    {
+      "id": "look_around",
+      "type": "dialogue",
+      "speaker": "Protagonist",
+      "text": "Let me look around and see what's here.",
+      "character": "protagonist",
+      "expression": "normal",
+      "se": "page_turn.mp3",
+      "next": "choice1"
+    },
+    {
+      "id": "choice1",
+      "type": "choice",
+      "text": "What should I do?",
+      "background": "room.jpg",
+      "character": "protagonist",
+      "expression": "normal",
+      "choices": [
+        {
+          "text": "Check the window",
+          "next": "check_window"
+        },
+        {
+          "text": "Open the door",
+          "next": "open_door"
+        },
+        {
+          "text": "Stay in the room",
+          "next": "stay_room"
+        }
+      ]
+    },
+    {
+      "id": "check_window",
+      "type": "dialogue",
+      "speaker": "Protagonist",
+      "text": "I looked out the window. It's a beautiful day outside!",
+      "character": "protagonist",
+      "expression": "happy",
+      "background": "room.jpg",
+      "next": "meet_npc"
+    },
+    {
+      "id": "open_door",
+      "type": "dialogue",
+      "speaker": "Protagonist",
+      "text": "I opened the door and stepped outside.",
+      "character": "protagonist",
+      "expression": "normal",
+      "background": "street.jpg",
+      "se": "click.mp3",
+      "next": "meet_npc"
+    },
+    {
+      "id": "stay_room",
+      "type": "dialogue",
+      "speaker": "Protagonist",
+      "text": "I decided to stay in the room for a while longer.",
+      "character": "protagonist",
+      "expression": "sad",
+      "next": "meet_npc"
+    },
+    {
+      "id": "meet_npc",
+      "type": "dialogue",
+      "speaker": "Friend",
+      "text": "Hey! There you are! I've been looking for you everywhere!",
+      "character": "npc1",
+      "expression": "normal",
+      "background": "street.jpg",
+      "next": "npc_question"
+    },
+    {
+      "id": "npc_question",
+      "type": "dialogue",
+      "speaker": "Friend",
+      "text": "We have plans today, remember? Are you ready to go?",
+      "character": "npc1",
+      "expression": "normal",
+      "next": "final_choice"
+    },
+    {
+      "id": "final_choice",
+      "type": "choice",
+      "text": "How do you respond?",
+      "background": "street.jpg",
+      "choices": [
+        {
+          "text": "Yes, let's go!",
+          "next": "ending_good"
+        },
+        {
+          "text": "Sorry, I can't make it.",
+          "next": "ending_neutral"
+        }
+      ]
+    },
+    {
+      "id": "ending_good",
+      "type": "dialogue",
+      "speaker": "Narrator",
+      "text": "And so, the two friends went on their adventure together. THE END.",
+      "background": "school.jpg",
+      "bgm": "sad_theme.mp3",
+      "next": "end"
+    },
+    {
+      "id": "ending_neutral",
+      "type": "dialogue",
+      "speaker": "Narrator",
+      "text": "The protagonist decided to stay behind. Perhaps another day. THE END.",
+      "background": "room.jpg",
+      "next": "end"
+    },
+    {
+      "id": "end",
+      "type": "end",
+      "text": "Thank you for playing!"
+    }
+  ]
+}

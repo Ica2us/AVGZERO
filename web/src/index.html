@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVG Game</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/ui.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Loading screen -->
+        <div id="loading-screen" class="screen active">
+            <div class="loading-content">
+                <h1>Loading...</h1>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <p id="loading-text">Initializing game engine...</p>
+            </div>
+        </div>
+
+        <!-- Main game screen -->
+        <div id="game-screen" class="screen">
+            <!-- Background layer -->
+            <div id="background-layer" class="layer">
+                <img id="background-image" class="background-image" alt="Background">
+            </div>
+
+            <!-- Character layer -->
+            <div id="character-layer" class="layer">
+                <img id="character-image" class="character-image" alt="Character">
+            </div>
+
+            <!-- UI layer -->
+            <div id="ui-layer" class="layer">
+                <!-- Dialogue box -->
+                <div id="dialogue-box" class="dialogue-box">
+                    <div class="dialogue-speaker">
+                        <span id="speaker-name"></span>
+                    </div>
+                    <div class="dialogue-text">
+                        <p id="dialogue-text"></p>
+                    </div>
+                    <div class="dialogue-continue">
+                        <span>▼</span>
+                    </div>
+                </div>
+
+                <!-- Choice box -->
+                <div id="choice-box" class="choice-box" style="display: none;">
+                    <div class="choice-title">
+                        <p id="choice-question"></p>
+                    </div>
+                    <div id="choice-list" class="choice-list">
+                        <!-- Choices will be dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Menu bar -->
+                <div id="menu-bar" class="menu-bar">
+                    <button id="btn-menu" class="menu-btn">Menu</button>
+                    <button id="btn-save" class="menu-btn">Save</button>
+                    <button id="btn-load" class="menu-btn">Load</button>
+                    <button id="btn-auto" class="menu-btn">Auto</button>
+                    <button id="btn-skip" class="menu-btn">Skip</button>
+                    <button id="btn-history" class="menu-btn">History</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu screen -->
+        <div id="menu-screen" class="screen menu-modal" style="display: none;">
+            <div class="menu-content">
+                <h2>Menu</h2>
+                <button class="menu-option-btn" id="btn-resume">Resume</button>
+                <button class="menu-option-btn" id="btn-save-menu">Save Game</button>
+                <button class="menu-option-btn" id="btn-load-menu">Load Game</button>
+                <button class="menu-option-btn" id="btn-settings">Settings</button>
+                <button class="menu-option-btn" id="btn-title">Return to Title</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- WASM Module (must load before other engine scripts) -->
+    <script src="../build/wasm/avg_engine.js"></script>
+    <script src="js/utils/EventBus.js"></script>
+    <script src="js/utils/AssetLoader.js"></script>
+    <script src="js/utils/AudioManager.js"></script>
+    <script src="js/engine/WasmLoader.js"></script>
+    <script src="js/engine/AVGEngine.js"></script>
+    <script src="js/engine/MemoryManager.js"></script>
+    <script src="js/renderer/Renderer.js"></script>
+    <script src="js/renderer/BackgroundRenderer.js"></script>
+    <script src="js/renderer/CharacterRenderer.js"></script>
+    <script src="js/renderer/TextRenderer.js"></script>
+    <script src="js/game/SceneManager.js"></script>
+    <script src="js/game/DialogueUI.js"></script>
+    <script src="js/game/ChoiceUI.js"></script>
+    <script src="js/game/SaveSystem.js"></script>
+    <script src="js/game/Game.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
