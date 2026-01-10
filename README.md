@@ -21,8 +21,8 @@ A lightweight Adventure/Visual Novel game engine built with WebAssembly and mode
 - `web/` - Web frontend (HTML, CSS, JavaScript)
 - `build/` - Build output directory
 - `scripts/` - Build and deployment scripts
-- `tools/` - Development tools (script editor, asset converter)
-- `tests/` - Unit tests
+- `*tools/` - Development tools (script editor, asset converter,now under development)
+- `*tests/` - Unit tests (under dev too)
 - `docs/` - Documentation
 
 ## Requirements
@@ -150,3 +150,4 @@ MIT License
 ## Contributing
 
 Contributions are welcome! Please read the contributing guidelines before submitting PRs.
+*have not done yet*
