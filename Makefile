@@ -1,5 +1,18 @@
 .PHONY: all build build-wasm build-web dev clean test deploy help
 
+# Detect OS
+ifeq ($(OS),Windows_NT)
+    SCRIPT_EXT = .bat
+    SCRIPT_PREFIX = call scripts\\
+    RM = rmdir /s /q
+    MKDIR = mkdir
+else
+    SCRIPT_EXT = .sh
+    SCRIPT_PREFIX = bash scripts/
+    RM = rm -rf
+    MKDIR = mkdir -p
+endif
+
 all: build
 
 help:
@@ -13,26 +26,28 @@ help:
 	@echo "  make test        - Run tests"
 	@echo "  make deploy      - Deploy to production"
 	@echo ""
+	@echo "Platform: $(if $(findstring Windows_NT,$(OS)),Windows,Unix)"
+	@echo ""
 
 build:
 	@echo "Building AVG Game Engine..."
-	bash scripts/build.sh
+	$(SCRIPT_PREFIX)build$(SCRIPT_EXT)
 
 build-wasm:
 	@echo "Building WASM engine..."
-	bash scripts/build_wasm.sh
+	$(SCRIPT_PREFIX)build_wasm$(SCRIPT_EXT)
 
 build-web:
 	@echo "Building web frontend..."
-	bash scripts/build_web.sh
+	$(SCRIPT_PREFIX)build_web$(SCRIPT_EXT)
 
 dev:
 	@echo "Starting development server..."
-	bash scripts/dev_server.sh
+	$(SCRIPT_PREFIX)dev_server$(SCRIPT_EXT)
 
 clean:
 	@echo "Cleaning build artifacts..."
-	bash scripts/clean.sh
+	$(SCRIPT_PREFIX)clean$(SCRIPT_EXT)
 
 test:
 	@echo "Running tests..."
@@ -40,4 +55,5 @@ test:
 
 deploy:
 	@echo "Deploying..."
-	bash scripts/deploy.sh
+	$(SCRIPT_PREFIX)deploy$(SCRIPT_EXT)
+

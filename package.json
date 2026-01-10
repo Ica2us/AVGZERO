@@ -4,13 +4,13 @@
   "description": "AVG Game Engine with WebAssembly",
   "main": "web/src/main.js",
   "scripts": {
-    "build": "npm run build:wasm && npm run build:web",
-    "build:wasm": "bash scripts/build_wasm.sh",
-    "build:web": "bash scripts/build_web.sh",
-    "dev": "bash scripts/dev_server.sh",
-    "clean": "bash scripts/clean.sh",
+    "build": "node scripts/run.js build",
+    "build:wasm": "node scripts/run.js build_wasm",
+    "build:web": "node scripts/run.js build_web",
+    "dev": "node scripts/run.js dev_server",
+    "clean": "node scripts/run.js clean",
     "test": "node tests/js/test_runner.js",
-    "deploy": "bash scripts/deploy.sh"
+    "deploy": "node scripts/run.js deploy"
   },
   "keywords": [
     "avg",

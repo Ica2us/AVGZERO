@@ -16,7 +16,7 @@ class Game {
             }
 
             // Load game script
-            const script = await assetLoader.loadJSON('assets/data/script.json');
+            const script = await assetLoader.loadJSON('../assets/data/script.json');
             await avgEngine.loadScript(script);
 
             // Setup event listeners
