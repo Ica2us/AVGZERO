@@ -1,0 +1,167 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 20,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "installDir": "${sourceDir}/install/${presetName}"
+        },
+        {
+            "name": "wasm-release",
+            "displayName": "WebAssembly Release",
+            "description": "Build for WebAssembly with Emscripten (Release)",
+            "inherits": "base",
+            "generator": "Ninja",
+            "toolchainFile": "${sourceDir}/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_WASM": "ON",
+                "BUILD_TESTS": "OFF"
+            },
+            "environment": {
+                "EMSDK": "${sourceDir}/emsdk"
+            }
+        },
+        {
+            "name": "wasm-debug",
+            "displayName": "WebAssembly Debug",
+            "description": "Build for WebAssembly with Emscripten (Debug)",
+            "inherits": "base",
+            "generator": "Ninja",
+            "toolchainFile": "${sourceDir}/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "BUILD_WASM": "ON",
+                "BUILD_TESTS": "OFF"
+            },
+            "environment": {
+                "EMSDK": "${sourceDir}/emsdk"
+            }
+        },
+        {
+            "name": "wasm-mingw",
+            "displayName": "WebAssembly Release (MinGW)",
+            "description": "Build for WebAssembly using MinGW Makefiles",
+            "inherits": "base",
+            "generator": "MinGW Makefiles",
+            "toolchainFile": "${sourceDir}/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_WASM": "ON",
+                "BUILD_TESTS": "OFF"
+            },
+            "environment": {
+                "EMSDK": "${sourceDir}/emsdk"
+            }
+        },
+        {
+            "name": "native-windows-msvc",
+            "displayName": "Native Windows (MSVC)",
+            "description": "Build native library with Visual Studio",
+            "inherits": "base",
+            "generator": "Visual Studio 17 2022",
+            "architecture": {
+                "value": "x64",
+                "strategy": "set"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_WASM": "OFF",
+                "BUILD_TESTS": "OFF"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
+            "name": "native-windows-mingw",
+            "displayName": "Native Windows (MinGW)",
+            "description": "Build native library with MinGW",
+            "inherits": "base",
+            "generator": "MinGW Makefiles",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_WASM": "OFF",
+                "BUILD_TESTS": "OFF"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
+            "name": "native-linux",
+            "displayName": "Native Linux",
+            "description": "Build native library on Linux",
+            "inherits": "base",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_WASM": "OFF",
+                "BUILD_TESTS": "OFF"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            }
+        },
+        {
+            "name": "native-macos",
+            "displayName": "Native macOS",
+            "description": "Build native library on macOS",
+            "inherits": "base",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_WASM": "OFF",
+                "BUILD_TESTS": "OFF"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "wasm-release",
+            "configurePreset": "wasm-release"
+        },
+        {
+            "name": "wasm-debug",
+            "configurePreset": "wasm-debug"
+        },
+        {
+            "name": "wasm-mingw",
+            "configurePreset": "wasm-mingw"
+        },
+        {
+            "name": "native-windows-msvc",
+            "configurePreset": "native-windows-msvc",
+            "configuration": "Release"
+        },
+        {
+            "name": "native-windows-mingw",
+            "configurePreset": "native-windows-mingw"
+        },
+        {
+            "name": "native-linux",
+            "configurePreset": "native-linux"
+        },
+        {
+            "name": "native-macos",
+            "configurePreset": "native-macos"
+        }
+    ]
+}

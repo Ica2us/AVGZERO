@@ -56,6 +56,16 @@ WASM_EXPORT void avg_reset();
 // Memory management
 WASM_EXPORT void avg_free_string(char* str);
 
+// Audio callbacks
+typedef void (*AudioPlayBGMCallback)(const char* url, int loop);
+typedef void (*AudioPlaySECallback)(const char* url);
+typedef void (*AudioStopBGMCallback)();
+
+WASM_EXPORT void avg_set_audio_play_bgm_callback(AudioPlayBGMCallback callback);
+WASM_EXPORT void avg_set_audio_play_se_callback(AudioPlaySECallback callback);
+WASM_EXPORT void avg_set_audio_stop_bgm_callback(AudioStopBGMCallback callback);
+WASM_EXPORT void avg_trigger_audio_from_node();
+
 #ifdef __cplusplus
 }
 #endif

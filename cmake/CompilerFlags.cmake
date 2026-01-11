@@ -1,22 +1,32 @@
 # Compiler flags configuration
+# This file sets up compiler-specific flags and warnings
 
-# Warning flags
-if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wpedantic")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-parameter")
-endif()
+# Function to apply common compiler settings to a target
+function(apply_compiler_settings TARGET_NAME)
+    # Warning flags
+    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
+        target_compile_options(${TARGET_NAME} PRIVATE
+            -Wall
+            -Wextra
+            -Wpedantic
+            -Wno-unused-parameter
+            -Wconversion
+            -Wsign-conversion
+        )
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        target_compile_options(${TARGET_NAME} PRIVATE
+            /W4           # High warning level
+            /wd4100       # Unreferenced formal parameter
+            /wd4244       # Conversion warnings
+            /permissive-  # Strict conformance
+        )
+        target_compile_definitions(${TARGET_NAME} PRIVATE
+            _CRT_SECURE_NO_WARNINGS
+            NOMINMAX      # Prevent min/max macros
+        )
+    endif()
+endfunction()
 
-# Optimization flags for different build types
-set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
-set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
-
-# Platform-specific flags
-if(WIN32)
-    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-endif()
-
-message(STATUS "C++ Compiler: ${CMAKE_CXX_COMPILER_ID}")
+# Print compiler info
+message(STATUS "C++ Compiler: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
 message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")

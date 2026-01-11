@@ -71,6 +71,40 @@ class AVGEngine {
 
         // Reset
         this.functions.reset = w.cwrap('avg_reset', null, []);
+
+        // Audio callbacks
+        this.functions.setAudioPlayBGMCallback = w.cwrap('avg_set_audio_play_bgm_callback', null, ['number']);
+        this.functions.setAudioPlaySECallback = w.cwrap('avg_set_audio_play_se_callback', null, ['number']);
+        this.functions.setAudioStopBGMCallback = w.cwrap('avg_set_audio_stop_bgm_callback', null, ['number']);
+        this.functions.triggerAudioFromNode = w.cwrap('avg_trigger_audio_from_node', null, []);
+    }
+
+    setupAudioCallbacks() {
+        if (!this.initialized) {
+            throw new Error('Engine not initialized');
+        }
+        // Audio is now handled directly in JavaScript via triggerAudio()
+        // No WASM callbacks needed - this avoids addFunction requirements
+    }
+
+    triggerAudio() {
+        if (!this.initialized) {
+            throw new Error('Engine not initialized');
+        }
+
+        // Handle audio directly in JavaScript using node data
+        const bgm = this.functions.getBGM();
+        const soundEffect = this.functions.getSoundEffect();
+
+        if (bgm) {
+            const fullUrl = `assets/audio/bgm/${bgm}`;
+            audioManager.playBGM(fullUrl, true);
+        }
+
+        if (soundEffect) {
+            const fullUrl = `assets/audio/se/${soundEffect}`;
+            audioManager.playSE(fullUrl);
+        }
     }
 
     async loadScript(jsonData) {

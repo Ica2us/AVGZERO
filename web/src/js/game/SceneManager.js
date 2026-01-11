@@ -24,15 +24,8 @@ class SceneManager {
             characterRenderer.clear();
         }
 
-        // Play BGM
-        if (node.bgm) {
-            await audioManager.playBGM(`assets/audio/bgm/${node.bgm}`, true);
-        }
-
-        // Play sound effect
-        if (node.soundEffect) {
-            await audioManager.playSE(`assets/audio/se/${node.soundEffect}`);
-        }
+        // Trigger audio through C++ engine callbacks
+        avgEngine.triggerAudio();
 
         eventBus.emit('scene-loaded', node);
     }

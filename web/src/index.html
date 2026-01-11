@@ -10,6 +10,15 @@
 </head>
 <body>
     <div id="game-container">
+        <!-- Audio unlock overlay -->
+        <div id="audio-unlock-overlay" class="screen active" style="position: absolute; z-index: 9999; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+            <div style="text-align: center; color: white;">
+                <h1>AVG Game</h1>
+                <p style="margin: 20px 0;">Click anywhere to start</p>
+                <p style="font-size: 14px; opacity: 0.7;">(Audio requires user interaction)</p>
+            </div>
+        </div>
+
         <!-- Loading screen -->
         <div id="loading-screen" class="screen active">
             <div class="loading-content">

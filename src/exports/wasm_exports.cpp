@@ -8,6 +8,11 @@ using namespace avg;
 // Global engine instance
 static AVGEngine* g_engine = nullptr;
 
+// Global audio callbacks
+static AudioPlayBGMCallback g_audio_play_bgm = nullptr;
+static AudioPlaySECallback g_audio_play_se = nullptr;
+static AudioStopBGMCallback g_audio_stop_bgm = nullptr;
+
 // Helper to allocate and copy string
 static char* allocateString(const std::string& str) {
     if (str.empty()) {
@@ -296,6 +301,39 @@ void avg_reset() {
 void avg_free_string(char* str) {
     if (str) {
         free(str);
+    }
+}
+
+void avg_set_audio_play_bgm_callback(AudioPlayBGMCallback callback) {
+    g_audio_play_bgm = callback;
+}
+
+void avg_set_audio_play_se_callback(AudioPlaySECallback callback) {
+    g_audio_play_se = callback;
+}
+
+void avg_set_audio_stop_bgm_callback(AudioStopBGMCallback callback) {
+    g_audio_stop_bgm = callback;
+}
+
+void avg_trigger_audio_from_node() {
+    if (!g_engine) {
+        return;
+    }
+
+    const DialogueNode* node = g_engine->getCurrentNode();
+    if (!node) {
+        return;
+    }
+
+    // Trigger BGM playback if BGM is set
+    if (!node->bgm.empty() && g_audio_play_bgm) {
+        g_audio_play_bgm(node->bgm.c_str(), 1); // 1 = loop enabled
+    }
+
+    // Trigger sound effect playback if SE is set
+    if (!node->soundEffect.empty() && g_audio_play_se) {
+        g_audio_play_se(node->soundEffect.c_str());
     }
 }
 

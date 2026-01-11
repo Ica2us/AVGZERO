@@ -2,8 +2,20 @@
 async function main() {
     console.log('AVG Game starting...');
 
+    // Setup audio unlock overlay
+    const audioOverlay = document.getElementById('audio-unlock-overlay');
     const loadingText = document.getElementById('loading-text');
     const progressFill = document.getElementById('progress-fill');
+
+    // Wait for user interaction to unlock audio
+    await new Promise(resolve => {
+        audioOverlay.addEventListener('click', async () => {
+            // Unlock audio context
+            await audioManager.unlockAudio();
+            audioOverlay.style.display = 'none';
+            resolve();
+        });
+    });
 
     try {
         // Update loading progress
@@ -12,6 +24,9 @@ async function main() {
 
         // Initialize game
         await game.init();
+
+        // Setup audio callbacks after engine is initialized
+        avgEngine.setupAudioCallbacks();
 
         loadingText.textContent = 'Loading assets...';
         progressFill.style.width = '60%';
